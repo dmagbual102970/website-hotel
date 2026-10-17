@@ -123,6 +123,28 @@ To collect submissions through a service, point the form at an endpoint
 
 ---
 
+## Per-lead demo sites
+
+Personalised demos for individual prospects are generated from the lead material in the parent
+project (`../leads/<slug>/`) and written into `site/demos/<slug>/`. Each demo shares the site-level
+`/assets/` folder (CSS, JS, fonts, stock photography) and only adds its own hero and OG image, so a
+demo costs roughly 0.5 MB rather than a 12 MB duplicate.
+
+```bash
+npm run build          # generic public site (root)
+npm run demos          # every lead that has photos/hero.jpg  -> site/demos/<slug>/
+npm run demos lodge-10 # just one lead
+```
+
+Each demo is generated with:
+
+* the lead's name, town, phones and Google Maps link from `lead.json`
+* its own hero (`assets/img/leads/<slug>/hero.jpg`) and OG card (`.../og.jpg`)
+* `noindex, nofollow` meta plus a local `robots.txt` (`Disallow: /`)
+* an on-page sample notice in the footer
+
+The public demo at the site root is never modified by a per-lead build.
+
 ## Quality checks
 
 ```bash

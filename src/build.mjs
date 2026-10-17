@@ -38,7 +38,7 @@ async function main() {
     for (const entry of await fs.readdir(dir, { withFileTypes: true })) {
       const full = path.join(dir, entry.name);
       if (entry.isDirectory()) {
-        if (entry.name !== 'assets') await cleanHtml(full);
+        if (entry.name !== 'assets' && entry.name !== 'demos') await cleanHtml(full);
       } else if (entry.name.endsWith('.html') || entry.name === 'sitemap.xml' || entry.name === 'robots.txt') {
         await fs.rm(full, { force: true });
       }

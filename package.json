@@ -10,7 +10,8 @@
     "serve": "node tools/serve.mjs",
     "qa": "node tools/qa.mjs",
     "smoke": "node tools/smoke.mjs",
-    "shots": "node tools/capture.mjs"
+    "shots": "node tools/capture.mjs",
+    "demos": "node src/build-demos.mjs"
   },
   "keywords": [
     "hotel",

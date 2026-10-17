@@ -14,11 +14,16 @@ export const esc = (value = '') =>
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;');
 
+let assetRoot = '';
+// Per-lead demos live in site/demos/<slug>/ and share the site-level /assets/.
+export const setAssetRoot = (value = '') => { assetRoot = value; };
+
 export const url = (depth, target = '') => {
   if (!target || /^(https?:|tel:|mailto:|#)/.test(target)) return target;
   // Content refers to imagery as img/..., which lives under assets/ once built.
   const resolved = target.charAt(0) === '/' ? target.slice(1) : target.startsWith('img/') ? 'assets/' + target : target;
-  return '../'.repeat(depth) + resolved;
+  const isAsset = target.startsWith('img/') || target.startsWith('assets/') || target.charAt(0) === '/';
+  return (isAsset ? assetRoot : '') + '../'.repeat(depth) + resolved;
 };
 
 const slugOf = (href = '') => href.split('/').pop().replace(/\.html$/, '');
@@ -136,7 +141,7 @@ function header(depth, active, current) {
       '<a class="brand" href="' + url(depth, 'index.html') + '" aria-label="' + esc(site.name) + ' — home">' +
         '<img class="brand-logo brand-logo--white" src="' + url(depth, 'assets/img/logo-white.svg') + '" alt="" width="160" height="160">' +
         '<img class="brand-logo brand-logo--navy" src="' + url(depth, 'assets/img/logo-navy.svg') + '" alt="" width="160" height="160">' +
-        '<span class="brand-text"><span class="brand-text__top">Sample Lodge</span><span class="brand-text__sub">Hotel &amp; Apartments</span></span>' +
+        '<span class="brand-text"><span class="brand-text__top">' + esc(site.brandTop) + '</span><span class="brand-text__sub">' + esc(site.brandSub) + '</span></span>' +
       '</a>' +
       '<nav class="primary-nav" aria-label="Primary"><ul class="nav-list">' + desktopNav(depth, active, current) + '</ul></nav>' +
       '<div class="header-actions">' +
@@ -170,7 +175,7 @@ function footer(depth) {
       '<div class="footer-col footer-col--brand">' +
         '<a class="brand brand--footer" href="' + url(depth, 'index.html') + '">' +
           '<img class="brand-logo" src="' + url(depth, 'assets/img/logo-white.svg') + '" alt="" width="160" height="160">' +
-          '<span class="brand-text"><span class="brand-text__top">Sample Lodge</span><span class="brand-text__sub">Hotel &amp; Apartments</span></span>' +
+          '<span class="brand-text"><span class="brand-text__top">' + esc(site.brandTop) + '</span><span class="brand-text__sub">' + esc(site.brandSub) + '</span></span>' +
         '</a>' +
         '<p class="footer-text">' + esc(site.description) + '</p>' +
       '</div>' +
@@ -206,6 +211,7 @@ function footer(depth) {
         '<p>&copy; ' + new Date().getFullYear() + ' ' + esc(site.legalName) + '. All rights reserved.</p>' +
         '<p class="footer-bottom__meta">Check-in ' + esc(site.checkIn) + ' &middot; Check-out ' + esc(site.checkOut) + ' &middot; <a href="' + url(depth, 'credits.html') + '">Photo credits</a></p>' +
       '</div>' +
+      (site.sampleNotice ? '<div class="container footer-demo-note">' + esc(site.sampleNotice) + '</div>' : '') +
     '</div>' +
   '</footer>';
 }
@@ -411,8 +417,8 @@ function welcomeSection(depth) {
         '<span class="rule rule--left" aria-hidden="true"></span>' +
         '<p class="lead">' + esc(site.description) + '</p>' +
         '<p>The hotel offers rooms, serviced apartments and self-contained cottages, ten minutes from the airport and five minutes from the town centre.</p>' +
-        '<ul class="stats">' + stats.map((stat) =>
-          '<li><span class="stats__value">' + esc(stat.value) + '</span><span class="stats__label">' + esc(stat.label) + '</span></li>').join('') + '</ul>' +
+        (site.hideStats ? '' : '<ul class="stats">' + stats.map((stat) =>
+          '<li><span class="stats__value">' + esc(stat.value) + '</span><span class="stats__label">' + esc(stat.label) + '</span></li>').join('') + '</ul>') +
         '<div class="split__actions">' +
           '<a class="btn btn--primary" href="' + url(depth, 'accommodation/bay-apartments.html') + '">Explore the rooms' + icon('arrowRight') + '</a>' +
           '<a class="link-arrow" href="' + url(depth, 'location.html') + '">Find us on the map' + icon('arrowUpRight') + '</a>' +
@@ -555,7 +561,7 @@ export function homePage() {
     active: 'home',
     bodyClass: 'page-home',
     schema,
-    preloadImage: 'assets/img/hero-home-1.jpg',
+    preloadImage: slides[0].image,
     children: [
       heroSection(0),
       welcomeSection(0),
@@ -810,7 +816,7 @@ export function galleryPage() {
   return layout({
     depth,
     title: 'Gallery',
-    description: 'Photographs of Sample Lodge Hotel — the gardens, pool, rooms, dining and the Papua New Guinea coast.',
+    description: 'Photographs of ' + site.name + ' — the gardens, pool, rooms, dining and the Papua New Guinea coast.',
     active: 'gallery',
     bodyClass: 'page-gallery',
     ogImage: 'img/banner-gallery.jpg',
@@ -858,7 +864,7 @@ export function directionsBand(depth) {
       '<div class="directions-band__copy" data-reveal>' +
         '<p class="eyebrow eyebrow--light">Getting here</p>' +
         '<h2 class="directions-band__title">Find us on the coast road</h2>' +
-        '<p class="directions-band__text">Sample Lodge Hotel is ten minutes from the airport and five minutes from the town centre. Airport transfers can be arranged through reception.</p>' +
+        '<p class="directions-band__text">' + esc(site.name) + ' is ten minutes from the airport and five minutes from the town centre. Airport transfers can be arranged through reception.</p>' +
       '</div>' +
       '<div class="directions-band__panel" data-reveal>' +
         '<ul class="directions-band__list">' +
@@ -878,7 +884,7 @@ export function directionsBand(depth) {
 export function locationPage() {
   const depth = 0;
   const prose = [
-    { title: 'The lodge', text: 'Sample Lodge Hotel sits on a quiet stretch of coast, ten minutes from the airport and just a few minutes from the town centre. Flights arrive daily from the capital and other regional towns.' },
+    { title: 'The lodge', text: site.name + ' sits on a quiet stretch of coast, ten minutes from the airport and just a few minutes from the town centre. Flights arrive daily from the capital and other regional towns.' },
     { title: 'The province', text: 'The lodge is on the northern coast of Papua New Guinea, three degrees south of the equator. Average highs sit around 30 degrees Celsius all year, with lows of roughly 23 degrees.' },
     { title: 'A blend of cultures', text: 'The region is home to a blend of cultures and more than 170 languages. It is widely considered one of the most beautiful and untouched parts of the country.' },
     { title: 'The water', text: 'Clear water and reefs stretch along the coastline and around the islands scattered across the bay. Palm-lined volcanic shoreline and white sand beaches make a striking backdrop from every angle.' },
@@ -1003,7 +1009,7 @@ export function notFoundPage() {
   return layout({
     depth: 0,
     title: 'Page not found',
-    description: 'The page you are looking for could not be found. Return to Sample Lodge Hotel.',
+    description: 'The page you are looking for could not be found. Return to ' + site.name + '.',
     active: '',
     bodyClass: 'page-404',
     children: '<section class="notfound">' +

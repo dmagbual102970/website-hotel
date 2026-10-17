@@ -1068,3 +1068,13 @@ textarea.input { resize: vertical; min-height: 96px; }
   .gallery-band__content { padding: 48px var(--gutter); }
   .gallery-band__text { margin-bottom: 24px; }
 }
+
+
+/* --------------------------------------------------------------------------
+   26. Per-lead demo notice
+   -------------------------------------------------------------------------- */
+.footer-demo-note {
+  margin-top: 16px; padding-top: 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 0.72rem; letter-spacing: 0.02em; color: rgba(255, 255, 255, 0.45);
+}

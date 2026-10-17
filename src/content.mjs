@@ -13,6 +13,10 @@ export const site = {
   longDescription:
     "Sample Lodge Hotel is a privately run boutique hotel on a quiet stretch of the Papua New Guinea coast, set amongst tropical gardens and palm-lined lawns. The hotel offers rooms, serviced apartments and self-contained cottages, ten minutes from the airport and five minutes from the town centre.",
   url: "https://www.samplewebsite.com",
+  brandTop: "Sample Lodge",
+  brandSub: "Hotel & Apartments",
+  sampleNotice: "",
+  hideStats: false,
   phoneLocal: "+675 123 4567",
   phoneLocalRaw: "+6751234567",
   phoneMobile: "+675 123 4568",
