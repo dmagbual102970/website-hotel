@@ -1,0 +1,86 @@
+[
+  {
+    "family": "Montserrat",
+    "style": "normal",
+    "weight": "300",
+    "file": "montserrat-300.woff2",
+    "bytes": 37956
+  },
+  {
+    "family": "Montserrat",
+    "style": "normal",
+    "weight": "400",
+    "file": "montserrat-400.woff2",
+    "bytes": 37956
+  },
+  {
+    "family": "Montserrat",
+    "style": "normal",
+    "weight": "500",
+    "file": "montserrat-500.woff2",
+    "bytes": 37956
+  },
+  {
+    "family": "Montserrat",
+    "style": "normal",
+    "weight": "600",
+    "file": "montserrat-600.woff2",
+    "bytes": 37956
+  },
+  {
+    "family": "Montserrat",
+    "style": "normal",
+    "weight": "700",
+    "file": "montserrat-700.woff2",
+    "bytes": 37956
+  },
+  {
+    "family": "Hind",
+    "style": "normal",
+    "weight": "300",
+    "file": "hind-300.woff2",
+    "bytes": 15860
+  },
+  {
+    "family": "Hind",
+    "style": "normal",
+    "weight": "400",
+    "file": "hind-400.woff2",
+    "bytes": 16216
+  },
+  {
+    "family": "Hind",
+    "style": "normal",
+    "weight": "500",
+    "file": "hind-500.woff2",
+    "bytes": 16788
+  },
+  {
+    "family": "Hind",
+    "style": "normal",
+    "weight": "600",
+    "file": "hind-600.woff2",
+    "bytes": 16612
+  },
+  {
+    "family": "Hind",
+    "style": "normal",
+    "weight": "700",
+    "file": "hind-700.woff2",
+    "bytes": 16268
+  },
+  {
+    "family": "Playfair Display",
+    "style": "italic",
+    "weight": "400",
+    "file": "playfair-display-italic-400.woff2",
+    "bytes": 38804
+  },
+  {
+    "family": "Playfair Display",
+    "style": "italic",
+    "weight": "500",
+    "file": "playfair-display-italic-500.woff2",
+    "bytes": 38804
+  }
+]

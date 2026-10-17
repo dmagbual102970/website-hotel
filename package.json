@@ -1,0 +1,22 @@
+{
+  "name": "sample-lodge-hotel",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Demo boutique-hotel website — static HTML/CSS/JS template with a build script, stock photography and QA tooling.",
+  "type": "module",
+  "scripts": {
+    "build": "node src/build.mjs",
+    "start": "node tools/serve.mjs",
+    "serve": "node tools/serve.mjs",
+    "qa": "node tools/qa.mjs",
+    "smoke": "node tools/smoke.mjs",
+    "shots": "node tools/capture.mjs"
+  },
+  "keywords": [
+    "hotel",
+    "static-site",
+    "template",
+    "papua-new-guinea"
+  ],
+  "license": "UNLICENSED"
+}

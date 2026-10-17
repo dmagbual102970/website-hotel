@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" role="img" aria-label="Sample Lodge emblem">
+  <g fill="none" stroke="#ffffff" stroke-linecap="round">
+    <circle cx="80" cy="80" r="74" stroke-width="2.6"/>
+    <circle cx="80" cy="80" r="66" stroke-width="1" opacity="0.45"/>
+    <circle cx="80" cy="62" r="14" stroke-width="2.6"/>
+    <g stroke-width="2.2">
+      <path d="M80 40v-9"/><path d="M80 84v9"/>
+      <path d="M52 62h-9"/><path d="M108 62h9"/>
+      <path d="M62.2 44.2l-6.4-6.4"/><path d="M97.8 79.8l6.4 6.4"/>
+      <path d="M97.8 44.2l6.4-6.4"/><path d="M62.2 79.8l-6.4 6.4"/>
+    </g>
+    <path d="M34 102c7.7-6 15.3-6 23 0s15.3 6 23 0 15.3-6 23 0 15.3 6 23 0" stroke-width="3"/>
+    <path d="M40 114c6.7-5 13.3-5 20 0s13.3 5 20 0 13.3-5 20 0 13.3 5 20 0" stroke-width="2.3" opacity="0.75"/>
+  </g>
+</svg>
