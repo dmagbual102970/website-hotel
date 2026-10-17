@@ -1,7 +1,9 @@
 from PIL import Image
 import os
-shots = r"C:\AKALIKO\DMM\PERSONAL\CLAUDE\Projects\PNG BUSINESS WITHOUT WEBSITE\MADANG LODGE\tools\shots"
-prev = r"C:\AKALIKO\DMM\PERSONAL\CLAUDE\Projects\PNG BUSINESS WITHOUT WEBSITE\MADANG LODGE\preview"
+import os
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+shots = os.path.join(ROOT, "tools", "shots")
+prev = os.path.join(ROOT, "preview")
 os.makedirs(prev, exist_ok=True)
 plan = [
     ("home-hero.png", "01-home-hero.jpg", 1400),

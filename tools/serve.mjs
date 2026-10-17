@@ -52,6 +52,6 @@ const server = http.createServer((request, response) => {
 });
 
 server.listen(PORT, () => {
-  console.log('Madang Lodge Hotel site: http://localhost:' + PORT);
+  console.log('Sample Lodge Hotel site: http://localhost:' + PORT);
   console.log('Serving ' + ROOT);
 });

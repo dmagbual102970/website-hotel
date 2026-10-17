@@ -364,7 +364,7 @@
     var room = form.querySelector('[name="room"]');
     var guests = form.querySelector('[name="guests"]');
     var message = form.querySelector('[name="message"]');
-    var to = form.getAttribute('data-email') || 'reservations@madanglodge.com.pg';
+    var to = form.getAttribute('data-email') || 'admin@samplewebsite.com';
 
     var today = new Date().toISOString().slice(0, 10);
     if (checkin) {
@@ -420,7 +420,7 @@
       }
 
       var lines = [
-        'Booking enquiry from the Madang Lodge Hotel website',
+        'Booking enquiry from the Sample Lodge Hotel website',
         '',
         'Name: ' + (name ? name.value.trim() : ''),
         'Email: ' + (email ? email.value.trim() : ''),
@@ -433,10 +433,10 @@
         'Notes:',
         (message && message.value.trim()) || '(none)',
         '',
-        'Sent from madanglodge.com',
+        'Sent from samplewebsite.com',
       ].filter(function (line) { return line !== ''; }).join('\r\n');
 
-      var subject = 'Booking enquiry — ' + (room && room.value ? room.value : 'Madang Lodge Hotel') +
+      var subject = 'Booking enquiry — ' + (room && room.value ? room.value : 'Sample Lodge Hotel') +
         (checkin && checkin.value ? ' — ' + checkin.value : '');
 
       window.location.href = 'mailto:' + to +
@@ -462,8 +462,8 @@
         return;
       }
       if (input) { input.classList.remove('is-invalid'); input.setAttribute('aria-invalid', 'false'); }
-      window.location.href = 'mailto:reservations@madanglodge.com.pg?subject=' +
-        encodeURIComponent('Newsletter signup') + '&body=' + encodeURIComponent('Please add me to the Madang Lodge newsletter: ' + value);
+      window.location.href = 'mailto:admin@samplewebsite.com?subject=' +
+        encodeURIComponent('Newsletter signup') + '&body=' + encodeURIComponent('Please add me to the Sample Lodge newsletter: ' + value);
       setStatus(status, 'Thank you — your email app will open to confirm your subscription.', 'success');
     });
   });
