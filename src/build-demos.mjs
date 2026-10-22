@@ -15,6 +15,20 @@ const SITE = path.join(here, '..', 'site');
 const LEADS = path.join(here, '..', '..', 'leads');
 const DEMO_BASE = 'https://dmagbual102970.github.io/website-hotel';
 
+const DEMO_HERO_CSS = [
+  '.hero .hero__overlay{background:',
+  'linear-gradient(180deg, rgba(4,18,44,0.55) 0%, rgba(4,18,44,0.05) 30%, rgba(4,18,44,0.12) 62%, rgba(4,18,44,0.62) 100%),',
+  'linear-gradient(90deg, rgba(4,18,44,0.36) 0%, rgba(4,18,44,0) 56%) !important;}',
+  '.hero .hero__img{filter:brightness(1.1) saturate(1.05);}',
+  '.hero .hero__title{text-shadow:0 2px 28px rgba(4,18,44,0.55);}',
+  '.hero .hero__text{text-shadow:0 2px 20px rgba(4,18,44,0.5);}',
+  '.hero .hero__eyebrow{text-shadow:0 1px 14px rgba(4,18,44,0.55);}',
+  '.hero .hero__count,.hero .hero__scroll{text-shadow:0 1px 12px rgba(4,18,44,0.6);}',
+  '.page-hero .page-hero__overlay{background:linear-gradient(180deg, rgba(4,18,44,0.66) 0%, rgba(4,18,44,0.18) 42%, rgba(4,18,44,0.58) 100%) !important;}',
+  '.page-hero .page-hero__title,.page-hero .page-hero__lede{text-shadow:0 2px 22px rgba(4,18,44,0.55);}',
+  '.page-hero .breadcrumb{text-shadow:0 1px 10px rgba(4,18,44,0.55);}',
+].join('');
+
 const savedSite = { ...site };
 const savedSlide = { ...slides[0] };
 const digits = (value = '') => String(value).replace(/[^\d+]/g, '');
@@ -42,6 +56,7 @@ async function buildLead(slug) {
   const display = lead.displayName || lead.businessName || slug;
   const town = lead.town || 'Papua New Guinea';
   const demoUrl = DEMO_BASE + '/demos/' + slug + '/';
+  const brightHero = lead.demo?.brightHero !== false; // lead demos default to a brighter hero
   const ogUrl = DEMO_BASE + '/assets/img/leads/' + slug + '/og.jpg';
 
   Object.assign(site, {
@@ -90,6 +105,10 @@ async function buildLead(slug) {
     let out = html;
     // absolute OG image for WhatsApp/social previews
     out = out.replace(/<meta property="og:image" content="[^"]*">/g, '<meta property="og:image" content="' + ogUrl + '">');
+    // brighter hero for lead demos (night photos turn to mud under the default overlay)
+    if (brightHero) {
+      out = out.replace('</head>', '<style id="demo-hero-bright">' + DEMO_HERO_CSS + '</style>\n</head>');
+    }
     // never index a personalised demo
     out = out.replace('</head>', '<meta name="robots" content="noindex,nofollow">\n</head>');
     const dest = path.join(outDir, file);
